@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "5d0e486d-4e07-4c60-a132-c8296a460dc2",
+		"name": "Boilerplate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Add Token to ENV\", function () {",
+									"    const jsonData = pm.response.json();",
+									"    const bodyToken = jsonData.token;",
+									"    pm.environment.set(\"token\", bodyToken);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fullUrl}}/auth/login",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Agilia\",\n\t\"email\": \"domingo.llanesas@agiliacenter.com\",\n\t\"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fullUrl}}/users",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{fullUrl}}/users?name=t",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "t"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{fullUrl}}/users/7b8e5f28-39a8-4591-91ad-56a8b0e3931a",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"users",
+								"7b8e5f28-39a8-4591-91ad-56a8b0e3931a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Testagilia\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{fullUrl}}/users/7b8e5f28-39a8-4591-91ad-56a8b0e3931a",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"users",
+								"7b8e5f28-39a8-4591-91ad-56a8b0e3931a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{fullUrl}}/users/7b8e5f28-39a8-4591-91ad-56a8b0e3931a",
+							"host": [
+								"{{fullUrl}}"
+							],
+							"path": [
+								"users",
+								"7b8e5f28-39a8-4591-91ad-56a8b0e3931a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/ping",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
